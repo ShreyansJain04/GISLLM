@@ -32,6 +32,7 @@ class Command(Enum):
     ASK = "!ask"
     DIFFICULTY = "!difficulty"
     PROGRESS = "!progress"
+    HISTORY = "!history"
     QUIT = "!quit"
 
 
@@ -56,6 +57,7 @@ class InteractiveSession:
             Command.ASK: "Ask a specific question",
             Command.DIFFICULTY: "Adjust difficulty level",
             Command.PROGRESS: "View learning progress",
+            Command.HISTORY: "View your past learning sessions",
             Command.QUIT: "End session"
         }
     
@@ -168,6 +170,9 @@ class InteractiveSession:
         
         elif command == Command.PROGRESS:
             self._show_progress()
+        
+        elif command == Command.HISTORY:
+            self._show_history()
         
         elif command == Command.QUIT:
             self.save_session_state('ended')
@@ -444,3 +449,36 @@ class InteractiveSession:
         
         # Save session as completed
         self.save_session_state('completed') 
+
+    def _show_history(self):
+        """Display user's past learning sessions."""
+        from memory import load_user
+        profile = load_user(self.username)
+        history = profile.get('history', [])
+        if not history:
+            print("\n📜 No past learning sessions found.")
+            return
+
+        print("\n📜 Your Learning History (most recent first):")
+        # Show up to last 10 sessions
+        recent_history = history[-10:][::-1]
+        for idx, session in enumerate(recent_history, 1):
+            date = session.get('date', '')
+            topic = session.get('topic', 'Unknown')
+            score = session.get('final_score', 0)
+            mastery = session.get('mastery_level', 'unknown')
+            print(f"  {idx}. {date[:10]} - {topic} | Score: {score:.0%} | Mastery: {mastery}")
+
+        # Optionally allow user to drill into a specific session
+        choice = input("\nEnter number to view details or press Enter to exit history: ").strip()
+        if choice.isdigit():
+            idx = int(choice) - 1
+            if 0 <= idx < len(recent_history):
+                session = recent_history[idx]
+                print(f"\n🗒️  Detailed Session View ({session.get('date', '')[:-7]}) - {session.get('topic', '')}")
+                # List subtopic performance
+                for perf in session.get('subtopics_performance', []):
+                    status = '✅' if perf.get('correct') else '❌'
+                    print(f"   • {perf.get('subtopic', 'Unknown')}: {status}")
+                print(f"\nOverall Score: {session.get('final_score', 0):.0%} | Mastery: {session.get('mastery_level', 'unknown')}")
+                input("\nPress Enter to return to your session...") 
