@@ -229,6 +229,65 @@ async def get_user_insights(username: str):
             }
         }
 
+@app.get("/api/learning/{username}/history")
+async def get_learning_history(username: str, limit: int = 20, summary: bool = True, topic: Optional[str] = None):
+    """Return a user's past learning sessions.
+
+    Query parameters:
+    • limit – number of recent sessions to return (use -1 for all)
+    • summary – if true, return lightweight summary (date, topic, score, mastery)
+    • topic – optional filter to only sessions matching topic substring
+    """
+    try:
+        profile = load_user(username)
+        history = profile.get("history", [])
+
+        if topic:
+            history = [h for h in history if topic.lower() in h.get("topic", "").lower()]
+
+        # Handle limit
+        if limit > 0:
+            history = history[-limit:]
+
+        # Reverse chronological (most recent first)
+        history = list(reversed(history))
+
+        if summary:
+            history = [
+                {
+                    "date": h.get("date"),
+                    "topic": h.get("topic"),
+                    "final_score": h.get("final_score", 0),
+                    "mastery_level": h.get("mastery_level", "unknown"),
+                }
+                for h in history
+            ]
+
+        return {"history": history}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/learning/{username}/history/{index}")
+async def get_learning_history_detail(username: str, index: int):
+    """Get detailed data for a specific learning session referred by its index (0 = most recent)."""
+    try:
+        profile = load_user(username)
+        history = profile.get("history", [])
+        if not history:
+            raise HTTPException(status_code=404, detail="No learning history found")
+
+        # Convert negative index or out-of-range
+        if index < 0 or index >= len(history):
+            raise HTTPException(status_code=404, detail="Session index out of range")
+
+        # Reverse chronological order – adjust index
+        selected = history[-(index + 1)]  # most recent is index 0
+        return {"session": selected}
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 # Learning content endpoints
 @app.post("/api/content/explain")
 async def explain_concept_endpoint(request: ConceptRequest):
@@ -550,7 +609,8 @@ async def execute_chat_command(command_req: CommandRequest):
 • !sources - Show available documents
 • !quiz <topic> - Start a quick quiz
 • !progress - View your learning progress
-• !difficulty <easy/medium/hard> - Set difficulty level"""
+• !difficulty <easy/medium/hard> - Set difficulty level
+• !history [<topic>|<limit>] - View your past learning sessions"""
             return {"response": help_text, "type": "help"}
         
         elif command_req.command == "!explain":
@@ -604,6 +664,45 @@ async def execute_chat_command(command_req: CommandRequest):
 • Study streak: {performance['study_streak']} days
 • Weak areas: {performance['weak_areas_count']}"""
             return {"response": progress_text, "type": "progress"}
+        
+        elif command_req.command == "!difficulty":
+            if not command_req.args:
+                return {"error": "Please specify a difficulty level. Usage: !difficulty <easy/medium/hard>"}
+            if command_req.args not in ["easy", "medium", "hard"]:
+                return {"error": "Invalid difficulty level. Choose easy, medium, or hard"}
+            return {"response": f"Difficulty level set to {command_req.args}", "type": "difficulty"}
+        
+        elif command_req.command == "!history":
+            # Optional args: topic filter or limit number
+            try:
+                limit = 10
+                topic_filter = None
+                if command_req.args:
+                    parts = command_req.args.split()
+                    for p in parts:
+                        if p.isdigit():
+                            limit = int(p)
+                        else:
+                            topic_filter = p
+                profile = load_user(command_req.username)
+                history = profile.get("history", [])
+                if topic_filter:
+                    history = [h for h in history if topic_filter.lower() in h.get("topic", "").lower()]
+                if limit > 0:
+                    history = history[-limit:]
+                history = list(reversed(history))
+                if not history:
+                    return {"response": "No matching history found.", "type": "history"}
+                # Build summary text
+                lines = [
+                    "Here are your recent sessions:",
+                ]
+                for idx, h in enumerate(history, 1):
+                    score_pct = f"{h.get('final_score', 0)*100:.0f}%" if h.get('final_score') is not None else "N/A"
+                    lines.append(f"{idx}. {h.get('date', '')[:10]} - {h.get('topic', '')} | Score: {score_pct} | {h.get('mastery_level', 'unknown')}")
+                return {"response": "\n".join(lines), "type": "history"}
+            except Exception as e:
+                return {"response": f"Failed to retrieve history: {str(e)}", "type": "history_error"}
         
         else:
             return {"error": f"Unknown command: {command_req.command}"}

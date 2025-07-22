@@ -185,6 +185,21 @@ export const healthAPI = {
   },
 };
 
+// Learning history API
+export const historyAPI = {
+  getHistory: async (username, limit = 20, summary = true, topic = "") => {
+    const response = await api.get(`/api/learning/${username}/history`, {
+      params: { limit, summary, topic },
+    });
+    return response.data;
+  },
+
+  getSessionDetail: async (username, index) => {
+    const response = await api.get(`/api/learning/${username}/history/${index}`);
+    return response.data;
+  },
+};
+
 // Chat API
 export const chatAPI = {
   sendMessage: async (username, message, context = null) => {
