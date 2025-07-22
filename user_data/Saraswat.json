@@ -1,0 +1,549 @@
+{
+  "weak_areas": [
+    "Intensive Review Session - GIS Basics - Round 6"
+  ],
+  "topic_mastery": {
+    "datum": "mastered",
+    "Adaptive Review Session": "mastered",
+    "Intensive Review Session": "intermediate"
+  },
+  "history": [
+    {
+      "date": "2025-07-21T21:20:47.364878",
+      "topic": "datum",
+      "subtopics_performance": [
+        {
+          "subtopic": "Introduction to Datum",
+          "question": "What is the primary function of a datum in mapping and geographic information systems?",
+          "answer": "2",
+          "correct": true,
+          "question_type": "objective",
+          "difficulty": "medium",
+          "timestamp": "2025-07-21T21:18:11.693Z",
+          "options": [
+            "It allows users to do real work in the real world.",
+            "It provides a system for comparing Terrestrial Reference Systems and Terrestrial Reference Frames.",
+            "It specifies the orientation and origins of the lines of latitude and longitude relative to the center of the earth or spheroid.",
+            "It is used to define the exact size and shape of the earth."
+          ],
+          "correct_option": 2,
+          "selected_option": 2,
+          "explanation": "A datum is used to define the orientation and origins of latitude and longitude lines, providing a reference point for these measurements relative to the center of the earth or a spheroid. This is essential for mapping and geographic information systems as it allows for accurate representation of locations."
+        },
+        {
+          "subtopic": "Types of Datum",
+          "question": "In the context of geospatial mapping, which of the following best describes the function of a datum? ",
+          "answer": "2",
+          "correct": true,
+          "question_type": "objective",
+          "difficulty": "medium",
+          "timestamp": "2025-07-21T21:19:15.104Z",
+          "options": [
+            "A datum is a type of Cartesian coordinate system named after Ren\u00e9 Descartes.",
+            "A datum is a tool used to measure the distortion of a map over large areas.",
+            "A datum specifies the orientation and origins of the lines of latitude and longitude relative to the center of the earth or spheroid.",
+            "A datum is a system used to ensure that there will be no negative coordinates in a mapping project."
+          ],
+          "correct_option": 2,
+          "selected_option": 2,
+          "explanation": "The context explains that a datum serves the purpose of specifying the orientation and origins of the lines of latitude and longitude relative to the center of the earth or spheroid. It is used in mapping to define how these lines will be positioned on the sphere. Other statements about the datum are either incorrect or describe only part of its functions."
+        },
+        {
+          "subtopic": "Datum in Computer Science",
+          "question": "What is the purpose of a datum in the context of mapping and computer science?",
+          "answer": "3",
+          "correct": true,
+          "question_type": "objective",
+          "difficulty": "medium",
+          "timestamp": "2025-07-21T21:20:03.427Z",
+          "options": [
+            "A datum is a type of coordinate system invented by Ren\u00e9 Descartes.",
+            "A datum describes the relationship between two Terrestrial Reference Systems (TRSs).",
+            "A datum is used to prevent misunderstandings between Terrestrial Reference Systems and Terrestrial Reference Frames.",
+            "A datum specifies the orientation and origins of the lines of latitude and longitude relative to the center of the earth or spheroid."
+          ],
+          "correct_option": 3,
+          "selected_option": 3,
+          "explanation": "The context provides that a datum serves the purpose of specifying exactly the orientation and origins of the lines of latitude and longitude relative to the center of the earth or spheroid. This is crucial in mapping terrestrial features like mountains, rivers, streets, and buildings."
+        },
+        {
+          "subtopic": "Datum in Geodesy",
+          "question": "What is the primary purpose of a datum in geodesy?",
+          "answer": "1",
+          "correct": true,
+          "question_type": "objective",
+          "difficulty": "medium",
+          "timestamp": "2025-07-21T21:20:44.819Z",
+          "options": [
+            "It provides the accurate measurements of the earth's radius and circumference.",
+            "It specifies the orientation and origins of lines of latitude and longitude relative to the center of the earth or spheroid.",
+            "It defines the exact geographical location of a specific point on the earth.",
+            "It calculates the deflection of the vertical in relation to the earth's surface."
+          ],
+          "correct_option": 1,
+          "selected_option": 1,
+          "explanation": "A datum in geodesy serves the purpose of defining how the lines of latitude and longitude will be oriented and positioned on the sphere or ellipsoid. It gives a reference system to map geographical features accurately."
+        }
+      ],
+      "final_score": 1.0,
+      "mastery_level": "mastered",
+      "session_stats": {
+        "objective_questions": 4,
+        "objective_correct": 4,
+        "subjective_questions": 0,
+        "subjective_correct": 0,
+        "average_objective_score": 1.0,
+        "average_subjective_score": 0,
+        "questions_by_difficulty": {
+          "easy": {
+            "total": 0,
+            "correct": 0
+          },
+          "medium": {
+            "total": 4,
+            "correct": 4
+          },
+          "hard": {
+            "total": 0,
+            "correct": 0
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-07-21T21:20:47.369469",
+      "topic": "datum",
+      "subtopics_performance": [
+        {
+          "subtopic": "Introduction to Datum",
+          "question": "What is the primary function of a datum in mapping and geographic information systems?",
+          "user_answer": "2",
+          "correct": true,
+          "score": 1,
+          "feedback": ""
+        },
+        {
+          "subtopic": "Types of Datum",
+          "question": "In the context of geospatial mapping, which of the following best describes the function of a datum? ",
+          "user_answer": "2",
+          "correct": true,
+          "score": 1,
+          "feedback": ""
+        },
+        {
+          "subtopic": "Datum in Computer Science",
+          "question": "What is the purpose of a datum in the context of mapping and computer science?",
+          "user_answer": "3",
+          "correct": true,
+          "score": 1,
+          "feedback": ""
+        },
+        {
+          "subtopic": "Datum in Geodesy",
+          "question": "What is the primary purpose of a datum in geodesy?",
+          "user_answer": "1",
+          "correct": true,
+          "score": 1,
+          "feedback": ""
+        }
+      ],
+      "final_score": 1.0,
+      "mastery_level": "mastered",
+      "session_stats": {
+        "objective_questions": 0,
+        "objective_correct": 0,
+        "subjective_questions": 4,
+        "subjective_correct": 4,
+        "average_objective_score": 0,
+        "average_subjective_score": 1.0,
+        "questions_by_difficulty": {
+          "easy": {
+            "total": 0,
+            "correct": 0
+          },
+          "medium": {
+            "total": 4,
+            "correct": 4
+          },
+          "hard": {
+            "total": 0,
+            "correct": 0
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-07-21T21:25:08.642686",
+      "topic": "Adaptive Review Session",
+      "subtopics_performance": [
+        {
+          "subtopic": "Coordinate Systems - Round 2",
+          "question": "Which of the following best describes the principles of a Cartesian coordinate system?",
+          "user_answer": "2",
+          "correct": true,
+          "score": 1,
+          "feedback": "\u2705 Correct! In the Cartesian coordinate system, the x-axis runs west to east and the y-axis runs south to north. Therefore, any point west or south of the origin is negative, while any point east or north is positive. This is stated in the context provided under the 'Foundation of a Coordinate System 3'.",
+          "difficulty": "medium",
+          "timestamp": "2025-07-21T21:22:06.713047",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "Data Types - Round 3",
+          "question": "Which of the following best describes the difference between floating-point and integer data types in a Geographic Information System (GIS)?",
+          "user_answer": "1",
+          "correct": true,
+          "score": 1,
+          "feedback": "\u2705 Correct! The correct answer differentiates the two data types based on the presence or absence of decimal digits, as stated in the context. The other options are incorrect as they either misrepresent the nature of these data types or incorrectly classify them.",
+          "difficulty": "medium",
+          "timestamp": "2025-07-21T21:22:42.641987",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "GIS Basics - Round 4",
+          "question": "Based on the context, which of the following is NOT considered a common application of GIS?",
+          "user_answer": "2",
+          "correct": true,
+          "score": 1,
+          "feedback": "\u2705 Correct! The context elaborates on GIS being used in various applications such as decision making, inventory management of geographic data, and determining optimal locations for infrastructure. However, it does not mention anything about using GIS to create non-geographic digital art.",
+          "difficulty": "hard",
+          "timestamp": "2025-07-21T21:23:06.887753",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "Coordinate Systems - Round 5",
+          "question": "How are local Cartesian coordinate systems often established in relation to other established coordinate systems?",
+          "user_answer": "2",
+          "correct": true,
+          "score": 1,
+          "feedback": "\u2705 Correct! The context mentions that local Cartesian coordinate systems often have arbitrary origins, meaning they may have no fixed relation to any other coordinate systems. This allows for flexibility in surveying and mapping, especially for specific projects like construction.",
+          "difficulty": "hard",
+          "timestamp": "2025-07-21T21:23:43.506959",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "Data Types - Round 6",
+          "question": "In the context of GIS, which data type would be most suitable to represent a geographical location's coordinates with both whole numbers and decimal values?",
+          "user_answer": "2",
+          "correct": true,
+          "score": 1,
+          "feedback": "\u2705 Correct! In the context of GIS, a floating-point data type is used to represent any data value that contains decimal digits. This would be suitable for representing geographical locations' coordinates which often require precision and thus, include decimal points. Integer, on the other hand, is used to represent data values that do not contain decimal digits. Alphanumeric strings and Boolean values are not suitable for representing numerical data.",
+          "difficulty": "hard",
+          "timestamp": "2025-07-21T21:24:12.928677",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "GIS Basics - Round 7",
+          "question": "Based on the context, what is the potential benefit of using a GIS beyond solving specific problems or answering particular questions?",
+          "user_answer": "1",
+          "correct": true,
+          "score": 1,
+          "feedback": "\u2705 Correct! The context mentions that while a GIS can be used to answer specific questions or solve particular problems, it often unearths even more interesting questions and presents more problems to be solved in the future, thereby enhancing the scope of inquiry and problem-solving.",
+          "difficulty": "hard",
+          "timestamp": "2025-07-21T21:24:38.861209",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "Coordinate Systems - Round 8",
+          "question": "What is the significance of understanding the principles of the Cartesian coordinate system in the context of GIS and CAD software?",
+          "user_answer": "1",
+          "correct": true,
+          "score": 1,
+          "feedback": "\u2705 Correct! The principles of the Cartesian coordinate system, such as positive and negative values for x and y-axes, allow GIS and CAD software to efficiently process and work with the coordinates. There is no direct mention in the context about these principles enabling the software to create new systems, convert coordinates, or predict future coordinates.",
+          "difficulty": "hard",
+          "timestamp": "2025-07-21T21:25:05.305024",
+          "time_spent": null,
+          "type": "question"
+        }
+      ],
+      "final_score": 1.0,
+      "mastery_level": "mastered",
+      "session_stats": {
+        "objective_questions": 0,
+        "objective_correct": 0,
+        "subjective_questions": 7,
+        "subjective_correct": 7,
+        "average_objective_score": 0,
+        "average_subjective_score": 1.0,
+        "questions_by_difficulty": {
+          "easy": {
+            "total": 0,
+            "correct": 0
+          },
+          "medium": {
+            "total": 2,
+            "correct": 2
+          },
+          "hard": {
+            "total": 5,
+            "correct": 5
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-07-21T21:27:26.706247",
+      "topic": "Intensive Review Session",
+      "subtopics_performance": [
+        {
+          "subtopic": "GIS Basics - Round 2",
+          "question": "What is a correct description of a GIS?",
+          "user_answer": "2",
+          "correct": true,
+          "score": 1,
+          "feedback": "\u2705 Correct! A GIS is a versatile tool that is used for a variety of purposes including answering geographic questions, supporting decision making, maintaining an inventory of geographic data and information, and making maps. It is not limited to only one of these functions.",
+          "difficulty": "easy",
+          "timestamp": "2025-07-21T21:26:01.167243",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "GIS Basics - Round 3",
+          "question": "What is the application approach to GIS primarily concerned with?",
+          "user_answer": "1",
+          "correct": true,
+          "score": 1,
+          "feedback": "\u2705 Correct! The context indicates that the application approach to GIS is more about how to use and apply the technology to solve problems, rather than focusing on the development or distribution of GIS itself.",
+          "difficulty": "easy",
+          "timestamp": "2025-07-21T21:26:18.679513",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "GIS Basics - Round 4",
+          "question": "What is a primary strength of a Geographic Information System (GIS)?",
+          "user_answer": "0",
+          "correct": true,
+          "score": 1,
+          "feedback": "\u2705 Correct! According to the provided context, one of the greatest strengths of a GIS is its ability to open up new avenues of inquiry while answering geographic questions. It is not limited to just answering specific questions, making maps, or supporting decision making. It is a versatile tool that can be used for various applications.",
+          "difficulty": "easy",
+          "timestamp": "2025-07-21T21:26:37.865469",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "GIS Basics - Round 5",
+          "question": "What is the role of a GIS in project development according to the given context?",
+          "user_answer": "1",
+          "correct": true,
+          "score": 1,
+          "feedback": "\u2705 Correct! According to the context, a GIS is not typically required for the basic work of entry-level GIS analysts or technicians. Instead, it is used after this basic work to apply a suite of skills and techniques that can enhance the project.",
+          "difficulty": "easy",
+          "timestamp": "2025-07-21T21:27:02.371563",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "GIS Basics - Round 6",
+          "question": "What does the application approach to GIS primarily view GIS as?",
+          "user_answer": "0",
+          "correct": false,
+          "score": 0,
+          "feedback": "\u274c Incorrect. The correct answer was: A tool\n\nExplanation: The context mentions that the application approach to GISs considers a GIS primarily to be a tool. It is used to answer questions, support decision making, maintain an inventory of geographic data and information, and make maps.",
+          "difficulty": "easy",
+          "timestamp": "2025-07-21T21:27:21.412927",
+          "time_spent": null,
+          "type": "question"
+        }
+      ],
+      "final_score": 0.8,
+      "mastery_level": "intermediate",
+      "session_stats": {
+        "objective_questions": 0,
+        "objective_correct": 0,
+        "subjective_questions": 5,
+        "subjective_correct": 4,
+        "average_objective_score": 0,
+        "average_subjective_score": 0.8,
+        "questions_by_difficulty": {
+          "easy": {
+            "total": 5,
+            "correct": 4
+          },
+          "medium": {
+            "total": 0,
+            "correct": 0
+          },
+          "hard": {
+            "total": 0,
+            "correct": 0
+          }
+        }
+      }
+    }
+  ],
+  "learning_plan": {},
+  "performance_data": {
+    "datum": {
+      "attempts": 2,
+      "average_score": 1.0,
+      "subtopic_scores": {
+        "Introduction to Datum": [
+          1,
+          1
+        ],
+        "Types of Datum": [
+          1,
+          1
+        ],
+        "Datum in Computer Science": [
+          1,
+          1
+        ],
+        "Datum in Geodesy": [
+          1,
+          1
+        ]
+      },
+      "question_type_performance": {
+        "objective": {
+          "total": 4,
+          "correct": 4,
+          "trend": [
+            1.0
+          ]
+        },
+        "subjective": {
+          "total": 4,
+          "correct": 4,
+          "trend": [
+            1.0
+          ]
+        }
+      },
+      "difficulty_performance": {
+        "easy": {
+          "total": 0,
+          "correct": 0
+        },
+        "medium": {
+          "total": 8,
+          "correct": 8
+        },
+        "hard": {
+          "total": 0,
+          "correct": 0
+        }
+      },
+      "common_mistakes": [],
+      "last_attempt": "2025-07-21T21:20:47.369486",
+      "improvement_rate": 0.0
+    },
+    "Adaptive Review Session": {
+      "attempts": 1,
+      "average_score": 1.0,
+      "subtopic_scores": {
+        "Coordinate Systems - Round 2": [
+          1
+        ],
+        "Data Types - Round 3": [
+          1
+        ],
+        "GIS Basics - Round 4": [
+          1
+        ],
+        "Coordinate Systems - Round 5": [
+          1
+        ],
+        "Data Types - Round 6": [
+          1
+        ],
+        "GIS Basics - Round 7": [
+          1
+        ],
+        "Coordinate Systems - Round 8": [
+          1
+        ]
+      },
+      "question_type_performance": {
+        "objective": {
+          "total": 0,
+          "correct": 0,
+          "trend": []
+        },
+        "subjective": {
+          "total": 7,
+          "correct": 7,
+          "trend": [
+            1.0
+          ]
+        }
+      },
+      "difficulty_performance": {
+        "easy": {
+          "total": 0,
+          "correct": 0
+        },
+        "medium": {
+          "total": 2,
+          "correct": 2
+        },
+        "hard": {
+          "total": 5,
+          "correct": 5
+        }
+      },
+      "common_mistakes": [],
+      "last_attempt": "2025-07-21T21:25:08.642700",
+      "improvement_rate": 0
+    },
+    "Intensive Review Session": {
+      "attempts": 1,
+      "average_score": 0.8,
+      "subtopic_scores": {
+        "GIS Basics - Round 2": [
+          1
+        ],
+        "GIS Basics - Round 3": [
+          1
+        ],
+        "GIS Basics - Round 4": [
+          1
+        ],
+        "GIS Basics - Round 5": [
+          1
+        ],
+        "GIS Basics - Round 6": [
+          0
+        ]
+      },
+      "question_type_performance": {
+        "objective": {
+          "total": 0,
+          "correct": 0,
+          "trend": []
+        },
+        "subjective": {
+          "total": 5,
+          "correct": 4,
+          "trend": [
+            0.8
+          ]
+        }
+      },
+      "difficulty_performance": {
+        "easy": {
+          "total": 5,
+          "correct": 4
+        },
+        "medium": {
+          "total": 0,
+          "correct": 0
+        },
+        "hard": {
+          "total": 0,
+          "correct": 0
+        }
+      },
+      "common_mistakes": [],
+      "last_attempt": "2025-07-21T21:27:26.706261",
+      "improvement_rate": 0
+    }
+  },
+  "last_active": "2025-07-21T21:27:26.706292"
+}

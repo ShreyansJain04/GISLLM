@@ -1,0 +1,99 @@
+{
+  "decks": {
+    "Coordinate Systems": [
+      {
+        "front": "Which of the following best describes the principles of a Cartesian coordinate system?",
+        "back": "\u2705 Correct! In the Cartesian coordinate system, the x-axis runs west to east and the y-axis runs south to north. Therefore, any point west or south of the origin is negative, while any point east or north is positive. This is stated in the context provided under the 'Foundation of a Coordinate System 3'.",
+        "subtopic": "Coordinate Systems",
+        "created_at": "2025-07-21T21:22:06.713171",
+        "last_reviewed": null,
+        "next_review": "2025-07-21T21:22:06.713173",
+        "interval": 0,
+        "ease_factor": 2.5,
+        "repetitions": 0,
+        "difficulty_level": "medium"
+      },
+      {
+        "front": "How are local Cartesian coordinate systems often established in relation to other established coordinate systems?",
+        "back": "\u2705 Correct! The context mentions that local Cartesian coordinate systems often have arbitrary origins, meaning they may have no fixed relation to any other coordinate systems. This allows for flexibility in surveying and mapping, especially for specific projects like construction.",
+        "subtopic": "Coordinate Systems",
+        "created_at": "2025-07-21T21:23:43.507243",
+        "last_reviewed": null,
+        "next_review": "2025-07-21T21:23:43.507246",
+        "interval": 0,
+        "ease_factor": 2.5,
+        "repetitions": 0,
+        "difficulty_level": "hard"
+      },
+      {
+        "front": "What is the significance of understanding the principles of the Cartesian coordinate system in the context of GIS and CAD software?",
+        "back": "\u2705 Correct! The principles of the Cartesian coordinate system, such as positive and negative values for x and y-axes, allow GIS and CAD software to efficiently process and work with the coordinates. There is no direct mention in the context about these principles enabling the software to create new systems, convert coordinates, or predict future coordinates.",
+        "subtopic": "Coordinate Systems",
+        "created_at": "2025-07-21T21:25:05.305480",
+        "last_reviewed": null,
+        "next_review": "2025-07-21T21:25:05.305484",
+        "interval": 0,
+        "ease_factor": 2.5,
+        "repetitions": 0,
+        "difficulty_level": "hard"
+      }
+    ],
+    "Data Types": [
+      {
+        "front": "Which of the following best describes the difference between floating-point and integer data types in a Geographic Information System (GIS)?",
+        "back": "\u2705 Correct! The correct answer differentiates the two data types based on the presence or absence of decimal digits, as stated in the context. The other options are incorrect as they either misrepresent the nature of these data types or incorrectly classify them.",
+        "subtopic": "Data Types",
+        "created_at": "2025-07-21T21:22:42.642226",
+        "last_reviewed": null,
+        "next_review": "2025-07-21T21:22:42.642229",
+        "interval": 0,
+        "ease_factor": 2.5,
+        "repetitions": 0,
+        "difficulty_level": "medium"
+      },
+      {
+        "front": "In the context of GIS, which data type would be most suitable to represent a geographical location's coordinates with both whole numbers and decimal values?",
+        "back": "\u2705 Correct! In the context of GIS, a floating-point data type is used to represent any data value that contains decimal digits. This would be suitable for representing geographical locations' coordinates which often require precision and thus, include decimal points. Integer, on the other hand, is used to represent data values that do not contain decimal digits. Alphanumeric strings and Boolean values are not suitable for representing numerical data.",
+        "subtopic": "Data Types",
+        "created_at": "2025-07-21T21:24:12.928948",
+        "last_reviewed": null,
+        "next_review": "2025-07-21T21:24:12.928952",
+        "interval": 0,
+        "ease_factor": 2.5,
+        "repetitions": 0,
+        "difficulty_level": "hard"
+      }
+    ],
+    "GIS Basics": [
+      {
+        "front": "Based on the context, which of the following is NOT considered a common application of GIS?",
+        "back": "\u2705 Correct! The context elaborates on GIS being used in various applications such as decision making, inventory management of geographic data, and determining optimal locations for infrastructure. However, it does not mention anything about using GIS to create non-geographic digital art.",
+        "subtopic": "GIS Basics",
+        "created_at": "2025-07-21T21:23:06.888250",
+        "last_reviewed": null,
+        "next_review": "2025-07-21T21:23:06.888257",
+        "interval": 0,
+        "ease_factor": 2.5,
+        "repetitions": 0,
+        "difficulty_level": "hard"
+      },
+      {
+        "front": "Based on the context, what is the potential benefit of using a GIS beyond solving specific problems or answering particular questions?",
+        "back": "\u2705 Correct! The context mentions that while a GIS can be used to answer specific questions or solve particular problems, it often unearths even more interesting questions and presents more problems to be solved in the future, thereby enhancing the scope of inquiry and problem-solving.",
+        "subtopic": "GIS Basics",
+        "created_at": "2025-07-21T21:24:38.861467",
+        "last_reviewed": null,
+        "next_review": "2025-07-21T21:24:38.861470",
+        "interval": 0,
+        "ease_factor": 2.5,
+        "repetitions": 0,
+        "difficulty_level": "hard"
+      }
+    ]
+  },
+  "stats": {
+    "cards_studied": 0,
+    "correct_answers": 0,
+    "study_sessions": 0
+  }
+}
