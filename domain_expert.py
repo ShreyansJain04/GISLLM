@@ -5,6 +5,13 @@ from typing import Tuple, List, Optional, Dict, Any, Union
 
 from advanced_rag import AdvancedRAGSystem
 from llm_providers import llm_manager
+from sentence_transformers import SentenceTransformer, util
+import torch
+
+
+# Load a pre-trained model for sentence similarity
+# This model is lightweight and effective for semantic similarity tasks
+similarity_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 
 # Initialize the advanced RAG system
@@ -161,7 +168,7 @@ def generate_example(topic: str, difficulty: str = "medium") -> str:
 
 
 def generate_question(topic: str, previous_questions: Optional[List[Union[str, Dict]]] = None, difficulty: str = "medium", question_type: str = "objective") -> Dict:
-    """Generate a question for a given topic.
+    """Generate a question for a given topic, ensuring it's not a semantic duplicate.
     
     Args:
         topic: The topic to generate a question for
@@ -175,21 +182,40 @@ def generate_question(topic: str, previous_questions: Optional[List[Union[str, D
     if previous_questions is None:
         previous_questions = []
    
-    # Extract question texts from previous_questions (handle both strings and dicts)
+    # Extract question texts from previous_questions
     previous_texts = []
     for q in previous_questions:
         if isinstance(q, dict):
-            # Extract text from question dictionary
             if 'text' in q:
                 previous_texts.append(q['text'])
             elif 'question' in q:
                 previous_texts.append(q['question'])
         elif isinstance(q, str):
             previous_texts.append(q)
+
+    max_retries = 3
+    for _ in range(max_retries):
+        # Try to get context for the topic
+        try:
+            context = _retrieve_context(topic)
+        except Exception as e:
+            print(f"RAG retrieval failed: {e}")
+            # Fallback to generating question without context
+            return _generate_fallback_question(topic, previous_texts, difficulty, question_type)
+        
+        # Generate a question
+        generated_question = _generate_question_from_context(context, topic, previous_texts, difficulty, question_type)
+
+        # Check for semantic duplicates
+        if not is_question_duplicate(generated_question["text"], previous_texts):
+            return generated_question
     
-    # Get context for the topic
-    context = _retrieve_context(topic)
-    
+    # If all retries fail, return the last generated question or a fallback
+    return generated_question or _generate_fallback_question(topic, previous_texts, difficulty, question_type)
+
+
+def _generate_question_from_context(context: str, topic: str, previous_texts: List[str], difficulty: str, question_type: str) -> Dict:
+    """Helper function to generate a question from a given context."""
     if question_type == "objective":
         # Build prompt for multiple choice question
         prompt = (
@@ -210,7 +236,7 @@ def generate_question(topic: str, previous_questions: Optional[List[Union[str, D
         )
         
         if previous_texts:
-            prompt += "\nAvoid these previous questions:\n" + "\n".join(previous_texts)
+            prompt += "\nAvoid these previous questions:\n" + "\n".join(f"- {q}" for q in previous_texts)
         
         # Get response from LLM
         response = query_domain_expert(prompt, context)
@@ -227,10 +253,9 @@ def generate_question(topic: str, previous_questions: Optional[List[Union[str, D
             
             # Randomize option order
             options = [correct_ans, wrong1, wrong2, wrong3]
-            correct_idx = 0  # Index of correct answer before shuffling
             import random
             random.shuffle(options)
-            correct_idx = options.index(correct_ans)  # New index after shuffling
+            correct_idx = options.index(correct_ans)
             
             return {
                 "text": question_text,
@@ -243,19 +268,7 @@ def generate_question(topic: str, previous_questions: Optional[List[Union[str, D
         except Exception as e:
             print(f"Error parsing LLM response: {e}")
             # Fallback to basic question if parsing fails
-            return {
-                "text": f"Which of the following best describes {topic}?",
-                "options": [
-                    "The correct description",
-                    "An incorrect description",
-                    "Another incorrect description",
-                    "Yet another incorrect description"
-                ],
-                "correct_option": 0,
-                "explanation": "Please refer to the course materials.",
-                "type": "objective",
-                "difficulty": difficulty
-            }
+            return _generate_fallback_question(topic, previous_texts, difficulty, question_type)
     else:
         # Generate subjective/analytical question
         prompt = (
@@ -263,7 +276,7 @@ def generate_question(topic: str, previous_questions: Optional[List[Union[str, D
             "The question should encourage critical thinking and detailed explanation."
         )
         if previous_texts:
-            prompt += "\nAvoid these previous questions:\n" + "\n".join(previous_texts)
+            prompt += "\nAvoid these previous questions:\n" + "\n".join(f"- {q}" for q in previous_texts)
         
         question_text = query_domain_expert(prompt, context)
         return {
@@ -500,6 +513,96 @@ def _retrieve_context(topic: str) -> str:
     """Legacy retrieval helper - kept for backward compatibility."""
     context, _ = retrieve_context_with_citations(topic)
     return context
+
+
+def _generate_fallback_question(topic: str, previous_texts: List[str], difficulty: str, question_type: str) -> Dict:
+    """Generate a question without RAG context as fallback."""
+    
+    if question_type == "objective":
+        # Predefined question templates for common GIS topics
+        fallback_questions = {
+            "GIS Basics": {
+                "easy": {
+                    "text": "What does GIS stand for?",
+                    "options": ["Geographic Information System", "Global Information Service", "Geological Information System", "Geographic Internet Service"],
+                    "correct_option": 0,
+                    "explanation": "GIS stands for Geographic Information System, which is used to capture, store, analyze and display geographic data."
+                },
+                "medium": {
+                    "text": "Which of the following is NOT a fundamental component of GIS?",
+                    "options": ["Hardware", "Software", "Data", "Internet Connection"],
+                    "correct_option": 3,
+                    "explanation": "While internet can be useful, the fundamental components of GIS are hardware, software, data, procedures, and people."
+                },
+                "hard": {
+                    "text": "In GIS topology, what does the term 'node' refer to?",
+                    "options": ["A point where lines intersect or end", "A type of spatial analysis", "A coordinate system", "A data format"],
+                    "correct_option": 0,
+                    "explanation": "In GIS topology, a node is a point where lines (arcs) intersect or end, forming the basic building blocks of network topology."
+                }
+            },
+            "Coordinate Systems": {
+                "easy": {
+                    "text": "What is a coordinate system used for in GIS?",
+                    "options": ["To locate features on Earth's surface", "To store attribute data", "To create maps", "To analyze spatial patterns"],
+                    "correct_option": 0,
+                    "explanation": "A coordinate system provides a framework for locating features on Earth's surface using coordinates."
+                },
+                "medium": {
+                    "text": "What is the difference between a geographic coordinate system and a projected coordinate system?",
+                    "options": ["Geographic uses degrees, projected uses linear units", "They are the same thing", "Geographic is 2D, projected is 3D", "Geographic is older technology"],
+                    "correct_option": 0,
+                    "explanation": "Geographic coordinate systems use angular units (degrees), while projected coordinate systems use linear units (meters, feet)."
+                },
+                "hard": {
+                    "text": "Which projection property is preserved in an equal-area (equivalent) projection?",
+                    "options": ["Shape", "Area", "Distance", "Direction"],
+                    "correct_option": 1,
+                    "explanation": "Equal-area projections preserve area relationships but may distort shape, distance, or direction."
+                }
+            }
+        }
+        
+        # Try to find a matching question
+        if topic in fallback_questions and difficulty in fallback_questions[topic]:
+            question_data = fallback_questions[topic][difficulty].copy()
+            question_data["type"] = "objective"
+            question_data["difficulty"] = difficulty
+            return question_data
+    
+    # Generic fallback if no specific question found
+    return {
+        "text": f"What is an important concept related to {topic}?",
+        "type": "objective",
+        "options": [
+            "Data collection and analysis",
+            "Spatial relationships",
+            "Geographic visualization", 
+            "All of the above"
+        ],
+        "correct_option": 3,
+        "explanation": f"All these concepts are important aspects of {topic} in GIS.",
+        "difficulty": difficulty
+    }
+
+
+def is_question_duplicate(new_question: str, previous_questions: List[str], similarity_threshold: float = 0.95) -> bool:
+    """Check if a new question is a semantic duplicate of any previous question."""
+    if not previous_questions:
+        return False
+    
+    # Encode the new question and previous questions into embeddings
+    new_embedding = similarity_model.encode(new_question, convert_to_tensor=True)
+    previous_embeddings = similarity_model.encode(previous_questions, convert_to_tensor=True)
+    
+    # Compute cosine similarity between the new question and all previous questions
+    cosine_scores = util.pytorch_cos_sim(new_embedding, previous_embeddings)
+    
+    # If any score is above the threshold, consider it a duplicate
+    if torch.any(cosine_scores > similarity_threshold):
+        return True
+        
+    return False
 
 
 

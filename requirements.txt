@@ -32,3 +32,36 @@ pytest>=7.3.0
 black>=23.0.0
 flake8>=6.0.0 
 portalocker 
+
+uvicorn
+fastapi
+python-dotenv
+requests
+beautifulsoup4
+anthropic
+openai
+google-generativeai
+groq
+cohere
+together
+mistralai
+milvus
+pymilvus
+pypdf
+langchain
+sentence-transformers
+torch
+# The following libraries are required for specific functionalities and can be installed separately:
+# For RAG (if not using pre-computed cache):
+# faiss-cpu
+# For deploying with Lightning AI:
+# lightning
+# For using wikipedia loader
+# wikipedia
+# For crawling with crawl4ai:
+# crawl4ai
+# To build docs:
+# pydoc-markdown
+# For linting:
+# flake8>=6.0.0
+portalocker 

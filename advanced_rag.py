@@ -235,6 +235,10 @@ class HybridRetriever:
     
     def _dense_search(self, query: str, k: int) -> List[Tuple[Document, float]]:
         """Dense embedding search."""
+        # Check if we have any documents
+        if not self.documents:
+            return []
+            
         # Generate query embedding
         query_embedding = self.embedder.encode(
             query,

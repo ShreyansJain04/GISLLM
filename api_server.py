@@ -970,8 +970,8 @@ async def start_spaced_review(request: ReviewSessionRequest):
         if not due_items_raw:
             # Fallback to default topics
             due_items_raw = [
-                {"topic": "GIS Basics", "subtopic": "Fundamentals", "days_until_review": 0, "priority": "high"},
-                {"topic": "Coordinate Systems", "subtopic": "Projections", "days_until_review": 0, "priority": "medium"}
+                {"topic": "GIS Basics", "subtopic": "Fundamentals", "days_until_review": 0, "priority": "high", "source": "question"},
+                {"topic": "Coordinate Systems", "subtopic": "Projections", "days_until_review": 0, "priority": "medium", "source": "question"}
             ]
         # Build mixed due_items list - matching main.py logic
         mixed_due_items = []
@@ -1656,6 +1656,9 @@ async def submit_review_answer(session_id: str, request: ReviewAnswerRequest):
                     'type': 'flashcard'
                 }
                 session["performance"].append(performance_entry)
+                # Pop the completed item from due_items
+                if session["due_items"]:
+                    session["due_items"].pop(0)
                 return {
                     "type": "flashcard",
                     "quality": quality,
@@ -1713,6 +1716,9 @@ async def submit_review_answer(session_id: str, request: ReviewAnswerRequest):
                         )
                     except ImportError:
                         pass
+                # Pop the completed item from due_items
+                if session["due_items"]:
+                    session["due_items"].pop(0)
                 return {
                     "type": "question",
                     "correct": correct,

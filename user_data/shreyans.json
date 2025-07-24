@@ -1,8 +1,620 @@
 {
-  "weak_areas": [],
-  "topic_mastery": {},
-  "history": [],
+  "weak_areas": [
+    "Adaptive Review Session - GIS COORDINATES - Round 2",
+    "Adaptive Review Session - GIS COORDINATES - Round 7",
+    "Adaptive Review Session - GIS COORDINATES - Round 8",
+    "Intensive Review Session - GIS Coordinates in Real World Applications - Round 2",
+    "GIS COORDINATES - Working with GIS Coordinates",
+    "Adaptive Review Session - GIS COORDINATES - Round 4",
+    "GIS COORDINATES - Introduction to GIS Coordinates",
+    "Adaptive Review Session - GIS COORDINATES - Round 5",
+    "GIS COORDINATES",
+    "GIS COORDINATES - GIS Coordinates in Real World Applications",
+    "Intensive Review Session - GIS Coordinates in Real World Applications - Round 5",
+    "Intensive Review Session - GIS Coordinates in Real World Applications - Round 4",
+    "Adaptive Review Session - GIS COORDINATES - Round 6",
+    "Intensive Review Session",
+    "Adaptive Review Session"
+  ],
+  "topic_mastery": {
+    "GIS COORDINATES": "beginner",
+    "Adaptive Review Session": "beginner",
+    "Intensive Review Session": "beginner"
+  },
+  "history": [
+    {
+      "date": "2025-07-24T15:51:04.984453",
+      "topic": "GIS COORDINATES",
+      "subtopics_performance": [
+        {
+          "subtopic": "Introduction to GIS Coordinates",
+          "question": "What is the main challenge in converting coordinates to geodetic latitude and longitude as per the Basic GIS Coordinates?",
+          "answer": "1",
+          "correct": false,
+          "question_type": "objective",
+          "difficulty": "medium",
+          "timestamp": "2025-07-24T19:48:54.564Z",
+          "options": [
+            "The deflection of the vertical angle does not follow a single cardinal direction.",
+            "The deflection of the vertical angle is always conveniently arranged.",
+            "The direction of gravity always aligns with the perpendicular to the ellipsoid.",
+            "The cardinal direction always follows the north-south direction."
+          ],
+          "correct_option": 0,
+          "selected_option": 1,
+          "explanation": "The context mentions that the deflection angle does not conveniently follow a single cardinal direction, such as north-south or east-west. This makes the conversion of coordinates to geodetic latitude and longitude challenging."
+        },
+        {
+          "subtopic": "Types of GIS Coordinates",
+          "question": "Based on the context, what is the geodetic longitude of a point in GIS coordinates?",
+          "answer": "3",
+          "correct": true,
+          "question_type": "objective",
+          "difficulty": "medium",
+          "timestamp": "2025-07-24T19:49:42.837Z",
+          "options": [
+            "The angle between the direction of gravity and the perpendicular to the ellipsoid.",
+            "The longitude of the central meridian.",
+            "The longitude through the point on the map.",
+            "The angle between the plane of the Greenwich meridian and the plane of the meridian that passes through the point of interest."
+          ],
+          "correct_option": 3,
+          "selected_option": 3,
+          "explanation": "The geodetic longitude of a point is defined in the context as the angle between the plane of the Greenwich meridian and the plane of the meridian that passes through the point of interest. The other options refer to different aspects or types of coordinates and do not accurately define geodetic longitude."
+        },
+        {
+          "subtopic": "Working with GIS Coordinates",
+          "question": "Why might someone prefer to use plane coordinates rather than geographic coordinates when working with GIS?",
+          "answer": "3",
+          "correct": false,
+          "question_type": "objective",
+          "difficulty": "medium",
+          "timestamp": "2025-07-24T19:50:29.089Z",
+          "options": [
+            "Plane coordinates are easier to use and distortion across small areas is not severe.",
+            "Plane coordinates provide more accurate measurements for large areas.",
+            "Geographic coordinates are too complex to be used in GIS.",
+            "Plane coordinates are newer and more innovative than geographic coordinates."
+          ],
+          "correct_option": 0,
+          "selected_option": 3,
+          "explanation": "The context mentions that plane coordinates are preferred because they are easy to use and the distortion across small areas is not severe. Although geographic coordinates can be used, they are somewhat cumbersome for conventional trigonometry. The text does not suggest that plane coordinates are more accurate for large areas, that geographic coordinates are too complex for GIS, or that plane coordinates are a newer and more innovative technology."
+        },
+        {
+          "subtopic": "GIS Coordinates in Real World Applications",
+          "question": "What is a primary challenge with using CAD models in GIS applications related to real-world coordinates?",
+          "answer": "2",
+          "correct": false,
+          "question_type": "objective",
+          "difficulty": "medium",
+          "timestamp": "2025-07-24T19:51:03.867Z",
+          "options": [
+            "CAD models are not compatible with GIS software platforms.",
+            "CAD models typically use local drawing coordinates instead of real-world coordinates.",
+            "CAD models cannot handle large datasets typically used in GIS applications.",
+            "CAD models are unable to represent objects in three dimensions."
+          ],
+          "correct_option": 1,
+          "selected_option": 2,
+          "explanation": "According to the context, CAD models typically use local drawing coordinates instead of real-world coordinates, making them less useful for map-centric applications in GIS."
+        }
+      ],
+      "final_score": 0.25,
+      "mastery_level": "beginner",
+      "session_stats": {
+        "objective_questions": 4,
+        "objective_correct": 1,
+        "subjective_questions": 0,
+        "subjective_correct": 0,
+        "average_objective_score": 0.25,
+        "average_subjective_score": 0,
+        "questions_by_difficulty": {
+          "easy": {
+            "total": 0,
+            "correct": 0
+          },
+          "medium": {
+            "total": 4,
+            "correct": 1
+          },
+          "hard": {
+            "total": 0,
+            "correct": 0
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-07-24T15:51:04.987214",
+      "topic": "GIS COORDINATES",
+      "subtopics_performance": [
+        {
+          "subtopic": "Introduction to GIS Coordinates",
+          "question": "What is the main challenge in converting coordinates to geodetic latitude and longitude as per the Basic GIS Coordinates?",
+          "user_answer": "1",
+          "correct": false,
+          "score": 0,
+          "feedback": ""
+        },
+        {
+          "subtopic": "Types of GIS Coordinates",
+          "question": "Based on the context, what is the geodetic longitude of a point in GIS coordinates?",
+          "user_answer": "3",
+          "correct": true,
+          "score": 1,
+          "feedback": ""
+        },
+        {
+          "subtopic": "Working with GIS Coordinates",
+          "question": "Why might someone prefer to use plane coordinates rather than geographic coordinates when working with GIS?",
+          "user_answer": "3",
+          "correct": false,
+          "score": 0,
+          "feedback": ""
+        },
+        {
+          "subtopic": "GIS Coordinates in Real World Applications",
+          "question": "What is a primary challenge with using CAD models in GIS applications related to real-world coordinates?",
+          "user_answer": "2",
+          "correct": false,
+          "score": 0,
+          "feedback": ""
+        }
+      ],
+      "final_score": 0.25,
+      "mastery_level": "beginner",
+      "session_stats": {
+        "objective_questions": 0,
+        "objective_correct": 0,
+        "subjective_questions": 4,
+        "subjective_correct": 1,
+        "average_objective_score": 0,
+        "average_subjective_score": 0.25,
+        "questions_by_difficulty": {
+          "easy": {
+            "total": 0,
+            "correct": 0
+          },
+          "medium": {
+            "total": 4,
+            "correct": 1
+          },
+          "hard": {
+            "total": 0,
+            "correct": 0
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-07-24T15:53:07.335427",
+      "topic": "Adaptive Review Session",
+      "subtopics_performance": [
+        {
+          "subtopic": "GIS COORDINATES - Round 2",
+          "question": "What is the purpose of a datum in GIS coordinates?",
+          "user_answer": "1",
+          "correct": false,
+          "score": 0,
+          "feedback": "\u274c Incorrect. The correct answer was: It provides a clearly defined surface or framework for coordinates.\n\nExplanation: A datum in GIS coordinates acts like a checkerboard, providing a clear framework or surface for arranging, analyzing, and moving the coordinates. Without it, the coordinates lack context and meaning.",
+          "difficulty": "medium",
+          "timestamp": "2025-07-24T15:52:42.171344",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "GIS COORDINATES - Round 3",
+          "question": "In the context of GIS coordinates, what is the characteristic of a gnomonic projection?",
+          "user_answer": "0",
+          "correct": false,
+          "score": 0,
+          "feedback": "\u274c Incorrect. The correct answer was: It is completely free of distortion.\n\nExplanation: The context mentions that places on a map and the resulting coordinates systems derived from them, like a gnomonic projection, are really completely free of distortion.",
+          "difficulty": "medium",
+          "timestamp": "2025-07-24T15:52:51.833178",
+          "time_spent": null,
+          "type": "question"
+        }
+      ],
+      "final_score": 0.0,
+      "mastery_level": "beginner",
+      "session_stats": {
+        "objective_questions": 0,
+        "objective_correct": 0,
+        "subjective_questions": 2,
+        "subjective_correct": 0,
+        "average_objective_score": 0,
+        "average_subjective_score": 0.0,
+        "questions_by_difficulty": {
+          "easy": {
+            "total": 0,
+            "correct": 0
+          },
+          "medium": {
+            "total": 2,
+            "correct": 0
+          },
+          "hard": {
+            "total": 0,
+            "correct": 0
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-07-24T16:03:40.943937",
+      "topic": "Intensive Review Session",
+      "subtopics_performance": [
+        {
+          "subtopic": "GIS Coordinates in Real World Applications - Round 2",
+          "question": "In real-world applications, why might the basic rules of GIS coordinates, such as the Pythagorean and great circle equations, not provide sufficiently accurate estimates of actual travel distance?",
+          "user_answer": "0",
+          "correct": false,
+          "score": 0,
+          "feedback": "\u274c Incorrect. The correct answer was: We are often forced to resort to summing the actual lengths of travel routes in many cases.\n\nExplanation: The basic rules of GIS coordinates, such as the Pythagorean and great circle equations, might not provide sufficiently accurate estimates of actual travel distance in real-world applications because they do not account for the actual lengths of travel routes. In many cases, a more accurate estimate of travel distance can be obtained by summing the lengths of travel routes.",
+          "difficulty": "easy",
+          "timestamp": "2025-07-24T16:02:42.075439",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "GIS Coordinates in Real World Applications - Round 3",
+          "question": "How are GIS coordinates typically represented in real-world applications?",
+          "user_answer": "1",
+          "correct": true,
+          "score": 1,
+          "feedback": "\u2705 Correct! In real-world applications, GIS coordinates are typically represented as a series of straight segments. Each segment length is then calculated using the Pythagorean formula and the coordinates of its endpoints, providing a more accurate estimate of actual travel distance. This approach is commonly used in many forms of GIS analysis.",
+          "difficulty": "easy",
+          "timestamp": "2025-07-24T16:02:57.490568",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "GIS Coordinates in Real World Applications - Round 4",
+          "question": "What is the advantage of datums in GIS coordinates in real-world applications?",
+          "user_answer": "1",
+          "correct": false,
+          "score": 0,
+          "feedback": "\u274c Incorrect. The correct answer was: Every point on a datum has a unique and accurate coordinate with no distortion or ambiguity.\n\nExplanation: According to the context, the advantage of datums is that they allow for each point to have a unique and accurate coordinate. There is no distortion or ambiguity, making them errorless in the abstract. The other options are not mentioned or suggested in the context.",
+          "difficulty": "easy",
+          "timestamp": "2025-07-24T16:03:12.240607",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "GIS Coordinates in Real World Applications - Round 5",
+          "question": "What kind of transformation is often implemented to transform coordinates from WGS84 into a local projection in real-world applications?",
+          "user_answer": "1",
+          "correct": false,
+          "score": 0,
+          "feedback": "\u274c Incorrect. The correct answer was: Molodenski transformation\n\nExplanation: The context states that the Molodenski transformation is often used in real-world applications, especially in the context of GPS/GNSS receivers, to transform coordinates from WGS84 into a local projection. The other options mentioned are not transformations used for this purpose.",
+          "difficulty": "easy",
+          "timestamp": "2025-07-24T16:03:24.457595",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "GIS Coordinates in Real World Applications - Round 6",
+          "question": "What is a common method used in GIS to estimate actual travel distance when simple rules like the Pythagorean and great circle equations are not sufficiently accurate?",
+          "user_answer": "0",
+          "correct": true,
+          "score": 1,
+          "feedback": "\u2705 Correct! When simple rules like the Pythagorean and great circle equations are not sufficiently accurate, GIS often resorts to summing the actual lengths of travel routes. This usually means summing the lengths of links in a network representation.",
+          "difficulty": "easy",
+          "timestamp": "2025-07-24T16:03:38.724087",
+          "time_spent": null,
+          "type": "question"
+        }
+      ],
+      "final_score": 0.4,
+      "mastery_level": "beginner",
+      "session_stats": {
+        "objective_questions": 0,
+        "objective_correct": 0,
+        "subjective_questions": 5,
+        "subjective_correct": 2,
+        "average_objective_score": 0,
+        "average_subjective_score": 0.4,
+        "questions_by_difficulty": {
+          "easy": {
+            "total": 5,
+            "correct": 2
+          },
+          "medium": {
+            "total": 0,
+            "correct": 0
+          },
+          "hard": {
+            "total": 0,
+            "correct": 0
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-07-24T16:05:23.059328",
+      "topic": "Adaptive Review Session",
+      "subtopics_performance": [
+        {
+          "subtopic": "GIS COORDINATES - Round 2",
+          "question": "What is the primary purpose of a map projection in the context of GIS coordinates?",
+          "user_answer": "0",
+          "correct": false,
+          "score": 0,
+          "feedback": "\u274c Incorrect. The correct answer was: To inform the design of the coordinate system and limit distortion.\n\nExplanation: The context states that a map projection's purpose informs its design. This means that when a map is projected, the aim is to create a coordinate system that limits distortion as much as possible. This is crucial in GIS because accuracy of spatial data is paramount.",
+          "difficulty": "medium",
+          "timestamp": "2025-07-24T16:04:04.769896",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "GIS COORDINATES - Round 3",
+          "question": "In the context of GIS coordinates, which type of coordinate system uses both an angle and a distance?",
+          "user_answer": "2",
+          "correct": true,
+          "score": 1,
+          "feedback": "\u2705 Correct! Polar coordinates are unique in the sense that they are represented by both an angle and a distance, as opposed to Cartesian coordinates that are all distances, and Latitude and Longitude that are all angles.",
+          "difficulty": "medium",
+          "timestamp": "2025-07-24T16:04:12.907141",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "GIS COORDINATES - Round 4",
+          "question": "In the context of GIS coordinates, what is the constraint in converting coordinates to a geodetic latitude and longitude?",
+          "user_answer": "0",
+          "correct": false,
+          "score": 0,
+          "feedback": "\u274c Incorrect. The correct answer was: The angle between the direction of gravity and the perpendicular to the ellipsoid does not follow just one cardinal direction\n\nExplanation: The text mentions that the conversion of coordinates to a geodetic latitude and longitude is complicated by the fact that the angle between the direction of gravity and the perpendicular to the ellipsoid does not follow a single, simple cardinal direction such as north-south or east-west. This is why the correct answer is that it does not follow just one cardinal direction.",
+          "difficulty": "medium",
+          "timestamp": "2025-07-24T16:04:33.906327",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "GIS COORDINATES - Round 5",
+          "question": "What is the analogy used to describe the role of a datum in the context of GIS coordinates?",
+          "user_answer": "0",
+          "correct": false,
+          "score": 0,
+          "feedback": "\u274c Incorrect. The correct answer was: Checkers without a checkerboard\n\nExplanation: The text uses the analogy of checkers without a checkerboard to describe the role of a datum. Without a datum, you can move and analyze coordinates, but you won't really understand what you have, much like you can move and arrange checkers, but without a checkerboard, you won't know the context or rules.",
+          "difficulty": "medium",
+          "timestamp": "2025-07-24T16:04:49.406231",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "GIS COORDINATES - Round 6",
+          "question": "In the context of GIS coordinates, which type of coordinates are all angles?",
+          "user_answer": "2",
+          "correct": false,
+          "score": 0,
+          "feedback": "\u274c Incorrect. The correct answer was: Latitude and longitude\n\nExplanation: In the provided context, it is specifically stated that latitude and longitude are coordinates that are all angles. Cartesian coordinates are described as all distances, and polar coordinates are described as being an angle and a distance. Geodetic coordinates are not mentioned in this context.",
+          "difficulty": "easy",
+          "timestamp": "2025-07-24T16:05:05.341096",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "GIS COORDINATES - Round 7",
+          "question": "What type of coordinates system is completely free of distortion in the context of GIS coordinates?",
+          "user_answer": "2",
+          "correct": false,
+          "score": 0,
+          "feedback": "\u274c Incorrect. The correct answer was: None\n\nExplanation: The context provided mentions that no places on a map and the resulting coordinates systems derived from them are completely free of distortion.",
+          "difficulty": "easy",
+          "timestamp": "2025-07-24T16:05:13.323672",
+          "time_spent": null,
+          "type": "question"
+        },
+        {
+          "subtopic": "GIS COORDINATES - Round 8",
+          "question": "What is a characteristic of polar coordinates in the context of GIS coordinates?",
+          "user_answer": "2",
+          "correct": false,
+          "score": 0,
+          "feedback": "\u274c Incorrect. The correct answer was: They are coordinates that consist of an angle and a distance. \n\nExplanation: In the context of GIS coordinates, polar coordinates are a combination of an angle and a distance, as shown in the third piece of context. This differentiates them from Cartesian coordinates, which are all distances, and latitude/longitude, which are all angles.",
+          "difficulty": "easy",
+          "timestamp": "2025-07-24T16:05:21.757244",
+          "time_spent": null,
+          "type": "question"
+        }
+      ],
+      "final_score": 0.14285714285714285,
+      "mastery_level": "beginner",
+      "session_stats": {
+        "objective_questions": 0,
+        "objective_correct": 0,
+        "subjective_questions": 7,
+        "subjective_correct": 1,
+        "average_objective_score": 0,
+        "average_subjective_score": 0.14285714285714285,
+        "questions_by_difficulty": {
+          "easy": {
+            "total": 3,
+            "correct": 0
+          },
+          "medium": {
+            "total": 4,
+            "correct": 1
+          },
+          "hard": {
+            "total": 0,
+            "correct": 0
+          }
+        }
+      }
+    }
+  ],
   "learning_plan": {},
-  "performance_data": {},
-  "last_active": "2025-07-07T12:38:16.388404"
+  "performance_data": {
+    "GIS COORDINATES": {
+      "attempts": 2,
+      "average_score": 0.25,
+      "subtopic_scores": {
+        "Introduction to GIS Coordinates": [
+          0,
+          0
+        ],
+        "Types of GIS Coordinates": [
+          1,
+          1
+        ],
+        "Working with GIS Coordinates": [
+          0,
+          0
+        ],
+        "GIS Coordinates in Real World Applications": [
+          0,
+          0
+        ]
+      },
+      "question_type_performance": {
+        "objective": {
+          "total": 4,
+          "correct": 1,
+          "trend": [
+            0.25
+          ]
+        },
+        "subjective": {
+          "total": 4,
+          "correct": 1,
+          "trend": [
+            0.25
+          ]
+        }
+      },
+      "difficulty_performance": {
+        "easy": {
+          "total": 0,
+          "correct": 0
+        },
+        "medium": {
+          "total": 8,
+          "correct": 2
+        },
+        "hard": {
+          "total": 0,
+          "correct": 0
+        }
+      },
+      "common_mistakes": [],
+      "last_attempt": "2025-07-24T15:51:04.987225",
+      "improvement_rate": 0.0
+    },
+    "Adaptive Review Session": {
+      "attempts": 2,
+      "average_score": 0.04285714285714285,
+      "subtopic_scores": {
+        "GIS COORDINATES - Round 2": [
+          0,
+          0
+        ],
+        "GIS COORDINATES - Round 3": [
+          0,
+          1
+        ],
+        "GIS COORDINATES - Round 4": [
+          0
+        ],
+        "GIS COORDINATES - Round 5": [
+          0
+        ],
+        "GIS COORDINATES - Round 6": [
+          0
+        ],
+        "GIS COORDINATES - Round 7": [
+          0
+        ],
+        "GIS COORDINATES - Round 8": [
+          0
+        ]
+      },
+      "question_type_performance": {
+        "objective": {
+          "total": 0,
+          "correct": 0,
+          "trend": []
+        },
+        "subjective": {
+          "total": 9,
+          "correct": 1,
+          "trend": [
+            0.0,
+            0.14285714285714285
+          ]
+        }
+      },
+      "difficulty_performance": {
+        "easy": {
+          "total": 3,
+          "correct": 0
+        },
+        "medium": {
+          "total": 6,
+          "correct": 1
+        },
+        "hard": {
+          "total": 0,
+          "correct": 0
+        }
+      },
+      "common_mistakes": [],
+      "last_attempt": "2025-07-24T16:05:23.059357",
+      "improvement_rate": 0.14285714285714285
+    },
+    "Intensive Review Session": {
+      "attempts": 1,
+      "average_score": 0.4,
+      "subtopic_scores": {
+        "GIS Coordinates in Real World Applications - Round 2": [
+          0
+        ],
+        "GIS Coordinates in Real World Applications - Round 3": [
+          1
+        ],
+        "GIS Coordinates in Real World Applications - Round 4": [
+          0
+        ],
+        "GIS Coordinates in Real World Applications - Round 5": [
+          0
+        ],
+        "GIS Coordinates in Real World Applications - Round 6": [
+          1
+        ]
+      },
+      "question_type_performance": {
+        "objective": {
+          "total": 0,
+          "correct": 0,
+          "trend": []
+        },
+        "subjective": {
+          "total": 5,
+          "correct": 2,
+          "trend": [
+            0.4
+          ]
+        }
+      },
+      "difficulty_performance": {
+        "easy": {
+          "total": 5,
+          "correct": 2
+        },
+        "medium": {
+          "total": 0,
+          "correct": 0
+        },
+        "hard": {
+          "total": 0,
+          "correct": 0
+        }
+      },
+      "common_mistakes": [],
+      "last_attempt": "2025-07-24T16:03:40.943971",
+      "improvement_rate": 0
+    }
+  },
+  "last_active": "2025-07-24T16:05:23.059438"
 }

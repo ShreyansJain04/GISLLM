@@ -78,13 +78,10 @@ const SpacedRepetitionReview = ({
     }
   };
 
-  // On initial load, load the first item
+  // On initial load, load the session
   useEffect(() => {
     const init = async () => {
       await loadSession();
-      if (sessionState === "active" && dueItems.length > 0) {
-        await loadAndSetNextItem(dueItems);
-      }
     };
     init();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -103,7 +100,7 @@ const SpacedRepetitionReview = ({
         sessionData.due_items.length > 0
       ) {
         setDueItems(sessionData.due_items);
-        setCurrentItem(sessionData.due_items[0]);
+        setCurrentItem(sessionData.due_items[0]); // Set first item directly
       } else if (
         sessionData.session_state === "active" &&
         (!sessionData.due_items || sessionData.due_items.length === 0)
