@@ -1,0 +1,36 @@
+{
+  "performance_mode": "balanced",
+  "chunk_size": 1024,
+  "max_chunks": 15000,
+  "prioritize_arcgis": true,
+  "embedding_batch_size": 32,
+  "cache_enabled": true,
+  
+  "performance_presets": {
+    "fast": {
+      "description": "Quick startup, fewer chunks",
+      "chunk_size": 2048,
+      "max_chunks": 8000,
+      "prioritize_arcgis": true
+    },
+    "balanced": {
+      "description": "Good performance with comprehensive coverage",
+      "chunk_size": 1024,
+      "max_chunks": 15000,
+      "prioritize_arcgis": true
+    },
+    "comprehensive": {
+      "description": "Maximum coverage, slower startup",
+      "chunk_size": 512,
+      "max_chunks": 25000,
+      "prioritize_arcgis": false
+    }
+  },
+  
+  "optimization_tips": [
+    "For faster startup: Use 'fast' preset or reduce max_chunks",
+    "For better search quality: Use 'comprehensive' preset",
+    "For ArcGIS focus: Keep prioritize_arcgis=true",
+    "Clear rag_cache/ folder to apply new settings"
+  ]
+} 

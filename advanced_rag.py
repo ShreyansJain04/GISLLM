@@ -398,28 +398,45 @@ class AdvancedRAGSystem:
             self._process_documents()
     
     def _process_documents(self):
-        """Process all documents in the docs directory."""
+        """Process all documents in the docs directory recursively."""
         documents = []
         
-        # Process text files
-        for txt_file in self.docs_path.glob("*.txt"):
+        # Process text files (recursively)
+        for txt_file in self.docs_path.rglob("*.txt"):
             docs = self._process_text_file(txt_file)
             documents.extend(docs)
         
-        # Process PDF files
+        # Process Markdown files (recursively) 
+        for md_file in self.docs_path.rglob("*.md"):
+            docs = self._process_markdown_file(md_file)
+            documents.extend(docs)
+        
+        # Process PDF files (recursively) - Check both current path AND parent docs folder
         try:
             import pdfplumber
-            for pdf_file in self.docs_path.glob("*.pdf"):
+            # Process PDFs in current docs path
+            for pdf_file in self.docs_path.rglob("*.pdf"):
                 docs = self._process_pdf_file(pdf_file)
                 documents.extend(docs)
+            
+            # If we're looking at consolidated docs, also check the main docs folder for PDFs
+            if "consolidated" in str(self.docs_path):
+                main_docs_path = self.docs_path.parent
+                if main_docs_path.exists():
+                    for pdf_file in main_docs_path.glob("*.pdf"):  # Only direct PDFs, not recursive
+                        docs = self._process_pdf_file(pdf_file)
+                        documents.extend(docs)
+                        
         except ImportError:
             print("pdfplumber not installed, skipping PDF files")
         
         # Add to retriever
         if documents:
             self.retriever.add_documents(documents)
+            print(f"Loaded {len(documents)} document chunks")
         else:
             print("No documents found to process")
+
     
     def _process_text_file(self, file_path: Path) -> List[Document]:
         """Process a text file into documents."""
@@ -437,6 +454,50 @@ class AdvancedRAGSystem:
                     metadata={'file_type': 'txt', 'chunk_size': len(chunk)}
                 )
                 documents.append(doc)
+        
+        return documents
+    
+    def _process_markdown_file(self, file_path: Path) -> List[Document]:
+        """Process a Markdown file into documents."""
+        documents = []
+        
+        try:
+            content = file_path.read_text(encoding='utf-8')
+            
+            # Simple markdown processing: remove common markdown syntax
+            import re
+            # Remove markdown headers (# ## ###)
+            content = re.sub(r'^#+\s*', '', content, flags=re.MULTILINE)
+            # Remove markdown links [text](url)
+            content = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', content)
+            # Remove markdown emphasis (* ** _ __)
+            content = re.sub(r'[*_]{1,2}([^*_]+)[*_]{1,2}', r'\1', content)
+            # Remove code blocks ```
+            content = re.sub(r'```[\s\S]*?```', '', content)
+            # Remove inline code `
+            content = re.sub(r'`([^`]+)`', r'\1', content)
+            # Remove markdown tables (basic)
+            content = re.sub(r'\|.*\|', '', content)
+            
+            chunks = self._chunk_text(content)
+            
+            for i, chunk in enumerate(chunks):
+                if chunk.strip():
+                    doc = Document(
+                        id="",
+                        text=chunk,
+                        source=str(file_path),
+                        chunk_index=i,
+                        metadata={
+                            'file_type': 'md',
+                            'chunk_size': len(chunk),
+                            'relative_path': str(file_path.relative_to(self.docs_path))
+                        }
+                    )
+                    documents.append(doc)
+        except Exception as e:
+            print(f"Error processing markdown file {file_path}: {e}")
+            return []
         
         return documents
     
@@ -470,36 +531,61 @@ class AdvancedRAGSystem:
         return documents
     
     def _chunk_text(self, text: str) -> List[str]:
-        """Chunk text with overlap for better context preservation."""
-        # Split into sentences first
-        sentences = text.replace('\n', ' ').split('. ')
-        sentences = [s.strip() + '.' for s in sentences if s.strip()]
+        """Optimized chunking with better size control and meaningful breaks."""
+        if not text.strip():
+            return []
+        
+        # Clean and normalize text
+        text = text.replace('\n\n', '\n').replace('\r', '').strip()
+        
+        # For very short text, return as single chunk
+        if len(text) <= self.chunk_size:
+            return [text]
+        
+        # Split by paragraphs first (better semantic boundaries)
+        paragraphs = [p.strip() for p in text.split('\n') if p.strip()]
         
         chunks = []
         current_chunk = ""
-        current_size = 0
         
-        for sentence in sentences:
-            sentence_size = len(sentence)
-            
-            # If adding this sentence exceeds chunk size, start new chunk
-            if current_size + sentence_size > self.chunk_size and current_chunk:
-                chunks.append(current_chunk.strip())
+        for paragraph in paragraphs:
+            # If paragraph alone is too big, split by sentences
+            if len(paragraph) > self.chunk_size:
+                # Save current chunk if exists
+                if current_chunk:
+                    chunks.append(current_chunk.strip())
+                    current_chunk = ""
                 
-                # Keep overlap by including last few sentences
-                overlap_text = current_chunk.split('.')[-3:]  # Last 3 sentences
-                current_chunk = '.'.join(overlap_text).strip()
-                if current_chunk and not current_chunk.endswith('.'):
-                    current_chunk += '.'
-                current_chunk += ' ' + sentence
-                current_size = len(current_chunk)
+                # Split large paragraph by sentences
+                sentences = [s.strip() + '.' for s in paragraph.split('. ') if s.strip()]
+                temp_chunk = ""
+                
+                for sentence in sentences:
+                    if len(temp_chunk) + len(sentence) > self.chunk_size and temp_chunk:
+                        chunks.append(temp_chunk.strip())
+                        # Keep some overlap (last sentence)
+                        last_sentence = temp_chunk.split('.')[-2] + '.' if '.' in temp_chunk else ""
+                        temp_chunk = (last_sentence + ' ' + sentence).strip()
+                    else:
+                        temp_chunk += ' ' + sentence if temp_chunk else sentence
+                
+                if temp_chunk:
+                    current_chunk = temp_chunk
             else:
-                current_chunk += ' ' + sentence if current_chunk else sentence
-                current_size += sentence_size
+                # Check if adding this paragraph exceeds chunk size
+                if len(current_chunk) + len(paragraph) > self.chunk_size and current_chunk:
+                    chunks.append(current_chunk.strip())
+                    current_chunk = paragraph
+                else:
+                    current_chunk += '\n' + paragraph if current_chunk else paragraph
         
         # Add final chunk
         if current_chunk.strip():
             chunks.append(current_chunk.strip())
+        
+        # Filter out very small chunks (less than 50 characters) unless it's the only chunk
+        if len(chunks) > 1:
+            chunks = [chunk for chunk in chunks if len(chunk) >= 50]
         
         return chunks
     

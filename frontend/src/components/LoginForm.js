@@ -41,10 +41,10 @@ const LoginForm = () => {
               <UserIcon className="w-8 h-8 text-white" />
             </motion.div>
             <h1 className="text-3xl font-bold text-gradient mb-2">
-              AI Tutoring System
+              GeoTutor
             </h1>
             <p className="text-secondary-600">
-              Enter your username to get started with personalized learning
+              Your AI-powered geographic information systems learning companion
             </p>
           </div>
 

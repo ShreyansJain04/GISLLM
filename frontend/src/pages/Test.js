@@ -27,6 +27,7 @@ const Test = () => {
   const [testComplete, setTestComplete] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
   const [masteryLevel, setMasteryLevel] = useState("");
+  const [readyForNext, setReadyForNext] = useState(false);
   const numQuestions = 3;
 
   // Start test: reset state and load first question
@@ -43,6 +44,7 @@ const Test = () => {
     setMasteryLevel("");
     setFeedback("");
     setIsCorrect(false);
+    setReadyForNext(false);
     try {
       await loadNextQuestion([]);
     } catch (err) {
@@ -59,6 +61,7 @@ const Test = () => {
     setQuestion(null);
     setFeedback("");
     setIsCorrect(false);
+    setReadyForNext(false);
     console.log("prevQuestions", prevQuestions);
     try {
       const res = await contentAPI.generateQuestion(
@@ -93,75 +96,59 @@ const Test = () => {
       const res = await contentAPI.checkAnswer(questionText, answerToSend);
       setFeedback(res.feedback);
       setIsCorrect(res.correct);
+      
       // Track asked questions and performance
       setAskedQuestions((prev) => [...prev, qObj]);
-      setSubtopicsPerformance((prev) => [
-        ...prev,
-        {
-          subtopic: `Test Question ${currentStep + 1}`,
-          question: qObj,
-          user_answer: answerToSend,
-          correct: res.correct,
-          score: res.correct ? 1 : 0,
-          feedback: res.feedback,
-        },
-      ]);
-      // After delay, go to next or finish
-      setTimeout(async () => {
-        if (currentStep + 1 < numQuestions) {
-          setCurrentStep((prev) => prev + 1);
-          await loadNextQuestion([...askedQuestions, qObj]);
-        } else {
-          // Test complete
-          const totalCorrect = [
-            ...subtopicsPerformance,
-            {
-              subtopic: `Test Question ${currentStep + 1}`,
-              question: qObj,
-              user_answer: answerToSend,
-              correct: res.correct,
-              score: res.correct ? 1 : 0,
-              feedback: res.feedback,
-            },
-          ].filter((p) => p.correct).length;
-          const score = totalCorrect / numQuestions;
-          setFinalScore(score);
-          let mastery = "beginner";
-          if (score >= 0.8) mastery = "mastered";
-          else if (score >= 0.6) mastery = "intermediate";
-          setMasteryLevel(mastery);
-          setTestComplete(true);
-          setSessionState("summary");
-          // Record session
-          if (user?.username) {
-            try {
-              await learningAPI.recordSession({
-                username: user.username,
-                topic,
-                subtopics_performance: [
-                  ...subtopicsPerformance,
-                  {
-                    subtopic: `Test Question ${currentStep + 1}`,
-                    question: qObj,
-                    user_answer: answerToSend,
-                    correct: res.correct,
-                    score: res.correct ? 1 : 0,
-                    feedback: res.feedback,
-                  },
-                ],
-                final_score: score,
-                mastery_level: mastery,
-              });
-            } catch (err) {
-              // Don't block UI on error
-            }
-          }
-        }
-      }, 1500);
+      const performanceEntry = {
+        subtopic: `Test Question ${currentStep + 1}`,
+        question: qObj,
+        user_answer: answerToSend,
+        correct: res.correct,
+        score: res.correct ? 1 : 0,
+        feedback: res.feedback,
+      };
+      setSubtopicsPerformance((prev) => [...prev, performanceEntry]);
+      
+      // Set ready for next instead of auto-advancing
+      setReadyForNext(true);
     } catch (err) {
       toast.error("Failed to check answer");
     } finally {
       setLoadingAnswer(false);
+    }
+  };
+
+  // Handle continue to next question or finish test
+  const handleContinue = async () => {
+    if (currentStep + 1 < numQuestions) {
+      setCurrentStep((prev) => prev + 1);
+      await loadNextQuestion(askedQuestions);
+    } else {
+      // Test complete
+      const totalCorrect = subtopicsPerformance.filter((p) => p.correct).length;
+      const score = totalCorrect / numQuestions;
+      setFinalScore(score);
+      let mastery = "beginner";
+      if (score >= 0.8) mastery = "mastered";
+      else if (score >= 0.6) mastery = "intermediate";
+      setMasteryLevel(mastery);
+      setTestComplete(true);
+      setSessionState("summary");
+      
+      // Record session
+      if (user?.username) {
+        try {
+          await learningAPI.recordSession({
+            username: user.username,
+            topic,
+            subtopics_performance: subtopicsPerformance,
+            final_score: score,
+            mastery_level: mastery,
+          });
+        } catch (err) {
+          // Don't block UI on error
+        }
+      }
     }
   };
 
@@ -179,6 +166,7 @@ const Test = () => {
     setMasteryLevel("");
     setFeedback("");
     setIsCorrect(false);
+    setReadyForNext(false);
   };
 
   if (sessionState === "input") {
@@ -192,11 +180,21 @@ const Test = () => {
           >
             <BookOpenIcon className="w-16 h-16 text-primary-600 mx-auto mb-4" />
             <h1 className="text-3xl font-bold text-secondary-900 mb-2">
-              Start Testing
+              GeoTutor Testing Mode
             </h1>
-            <p className="text-secondary-600">
-              Enter a topic to begin testing your understanding
+            <p className="text-secondary-600 mb-4">
+              Test your understanding of geographic concepts with objective questions
             </p>
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-left">
+              <h3 className="font-semibold text-blue-900 mb-2">How Testing Works:</h3>
+              <ul className="text-sm text-blue-800 space-y-1">
+                <li>• You'll receive {numQuestions} objective questions on your chosen topic</li>
+                <li>• Select your answer from the multiple choice options</li>
+                <li>• Get immediate feedback with explanations</li>
+                <li>• Review each answer before continuing to the next question</li>
+                <li>• Receive a final score and mastery level assessment</li>
+              </ul>
+            </div>
           </motion.div>
 
           <motion.form
@@ -210,14 +208,14 @@ const Test = () => {
               htmlFor="topic"
               className="block text-sm font-medium text-secondary-700 mb-2"
             >
-              What would you like to learn?
+              What topic would you like to test yourself on?
             </label>
             <input
               type="text"
               id="topic"
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              placeholder="e.g., GIS Coordinates, Geocoding, Geospatial Data, etc."
+              placeholder="e.g., GIS Coordinates, Geocoding, Geospatial Analysis, Map Projections..."
               className="input-field mb-4"
               disabled={loading}
               required
@@ -236,7 +234,7 @@ const Test = () => {
               ) : (
                 <>
                   <PlayIcon className="w-5 h-5" />
-                  <span>Start Testing</span>
+                  <span>Start GeoTutor Test</span>
                 </>
               )}
             </button>
@@ -257,7 +255,7 @@ const Test = () => {
           <div className="mb-6">
             <TrophyIcon className="w-16 h-16 text-primary-600 mx-auto mb-4" />
             <h2 className="text-2xl font-bold text-secondary-900 mb-2">
-              Test Complete!
+              GeoTutor Test Complete!
             </h2>
             <p className="text-secondary-600">
               You scored {(finalScore * 100).toFixed(1)}%<br />
@@ -268,7 +266,7 @@ const Test = () => {
             </p>
           </div>
           <div className="mb-8 text-left">
-            <h3 className="text-lg font-medium mb-2">Your Answers:</h3>
+            <h3 className="text-lg font-medium mb-2">Your Performance:</h3>
             <ul className="space-y-2">
               {subtopicsPerformance.map((perf, idx) => (
                 <li
@@ -285,7 +283,7 @@ const Test = () => {
                     Your answer:{" "}
                     <span className="font-mono">{perf.user_answer}</span>
                   </div>
-                  <div>Correct: {perf.correct ? "✅" : "❌"}</div>
+                  <div>Result: {perf.correct ? "✅ Correct" : "❌ Incorrect"}</div>
                   <div className="text-sm text-secondary-600">
                     Feedback: {perf.feedback}
                   </div>
@@ -295,9 +293,9 @@ const Test = () => {
           </div>
           <button
             onClick={resetSession}
-            className="bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700"
+            className="bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition-colors duration-200"
           >
-            New Test
+            Take Another Test
           </button>
         </motion.div>
       </div>
@@ -309,7 +307,7 @@ const Test = () => {
     <div className="p-6 max-w-xl mx-auto">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-secondary-900">
-          Testing: {topic}
+          GeoTutor Test: {topic}
         </h1>
         <button onClick={resetSession} className="btn-secondary">
           New Topic
@@ -328,6 +326,9 @@ const Test = () => {
             loading={loadingAnswer}
             feedback={feedback}
             isCorrect={isCorrect}
+            showContinueButton={readyForNext}
+            onContinue={handleContinue}
+            mode="test"
           />
         )
       )}

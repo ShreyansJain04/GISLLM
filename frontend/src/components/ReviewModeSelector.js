@@ -13,7 +13,7 @@ const ReviewModeSelector = ({ onSelectMode, insights, loading }) => {
     {
       id: "adaptive",
       title: "Adaptive Review",
-      description: "AI adjusts difficulty based on your performance",
+      description: "GeoTutor AI adjusts question difficulty based on your performance and learning patterns",
       icon: ChartBarIcon,
       color: "bg-blue-500",
       recommended: true,
@@ -21,28 +21,28 @@ const ReviewModeSelector = ({ onSelectMode, insights, loading }) => {
     {
       id: "intensive",
       title: "Intensive Review",
-      description: "Focus on high-priority weaknesses",
+      description: "Deep dive into your weakest GIS concepts with focused practice questions",
       icon: AcademicCapIcon,
       color: "bg-purple-500",
     },
     {
       id: "spaced",
       title: "Spaced Repetition",
-      description: "Review items due for spaced repetition",
+      description: "Review topics at optimal intervals to maximize long-term retention",
       icon: ClockIcon,
       color: "bg-green-500",
     },
     {
       id: "quick",
       title: "Quick Review",
-      description: "Rapid review of all weak areas",
+      description: "Rapid 10-minute review session covering multiple weak areas",
       icon: BoltIcon,
       color: "bg-orange-500",
     },
     {
       id: "flashcards",
       title: "Flashcard Review",
-      description: "Traditional flashcard interface",
+      description: "Traditional flashcard interface for memorizing key GIS terms and concepts",
       icon: BookOpenIcon,
       color: "bg-indigo-500",
     },
@@ -75,10 +75,10 @@ const ReviewModeSelector = ({ onSelectMode, insights, loading }) => {
     <div className="space-y-6">
       <div className="text-center">
         <h2 className="text-2xl font-bold text-secondary-900">
-          Choose Review Mode
+          Choose Your Review Mode
         </h2>
         <p className="text-secondary-600 mt-2">
-          Select how you'd like to review your weak areas
+          Select how you'd like GeoTutor to help you review and strengthen your understanding
         </p>
       </div>
 

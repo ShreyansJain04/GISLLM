@@ -410,11 +410,10 @@ const Review = () => {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-secondary-900">
-              Review Mode
+              GeoTutor Review Mode
             </h1>
             <p className="text-secondary-600">
-              Choose how you'd like to review your weak areas and improve your
-              understanding
+              Strengthen your understanding of GIS concepts through targeted review sessions designed to address your weak areas
             </p>
           </div>
         </div>

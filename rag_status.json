@@ -1,0 +1,10 @@
+{
+  "status": "optimized",
+  "chunk_count": 5000,
+  "settings": {
+    "chunk_size": 2048,
+    "max_chunks": 5000,
+    "prioritize_arcgis": true
+  },
+  "performance": "fast_startup"
+}

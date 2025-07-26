@@ -126,11 +126,22 @@ const Dashboard = () => {
   return (
     <div className="p-6 space-y-6">
       {/* Header */}
-      <div className="mt-16">
-        <h1 className="text-2xl font-bold text-secondary-900">
-          Welcome back, {user?.username}!
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-bold text-secondary-900 mb-4">
+          Welcome to GeoTutor
         </h1>
-        <p className="text-secondary-600 mt-1">
+        <p className="text-xl text-secondary-600 max-w-2xl mx-auto">
+          Your intelligent geographic information systems learning companion.
+          Explore interactive lessons, take tests, and track your progress.
+        </p>
+      </div>
+
+      {/* Personalized Greeting */}
+      <div className="text-center mb-8">
+        <h2 className="text-xl font-semibold text-secondary-800 mb-2">
+          Welcome back, {user?.username}!
+        </h2>
+        <p className="text-secondary-600">
           Here's your learning progress and recommendations
         </p>
       </div>

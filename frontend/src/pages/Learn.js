@@ -581,11 +581,10 @@ const Learn = () => {
             </div>
             <div>
               <h1 className="text-xl font-semibold text-secondary-900">
-                Learn with AI Tutor
+                GeoTutor Interactive Learning
               </h1>
               <p className="text-sm text-secondary-600">
-                Ask questions, get explanations, or use commands (type ! for
-                help)
+                Learn GIS concepts through guided interactive sessions with explanations and practice
               </p>
             </div>
           </div>
@@ -638,11 +637,11 @@ const Learn = () => {
               <SparklesIcon className="w-10 h-10 text-white" />
             </motion.div>
             <h2 className="text-2xl font-bold text-secondary-900 mb-2">
-              Welcome to your AI Tutor!
+              Welcome to GeoTutor Learning!
             </h2>
             <p className="text-secondary-600 mb-6 max-w-md">
-              I'm here to help you learn. Ask me anything, request explanations,
-              or use commands like !quiz or !explain.
+              Start your guided learning journey through GIS and geography concepts. 
+              I'll provide explanations, examples, and interactive questions to help you master the material.
             </p>
             {/* Suggestion chips */}
             {suggestions.length > 0 && (

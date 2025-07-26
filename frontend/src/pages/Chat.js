@@ -220,11 +220,10 @@ const Chat = () => {
             </div>
             <div>
               <h1 className="text-xl font-semibold text-secondary-900">
-                AI Tutor Chat
+                GeoTutor Chat
               </h1>
               <p className="text-sm text-secondary-600">
-                Ask questions, get explanations, or use commands (type ! for
-                help)
+                Ask questions about GIS, get explanations, or use commands (type ! for help)
               </p>
             </div>
           </div>
@@ -277,11 +276,11 @@ const Chat = () => {
               <SparklesIcon className="w-10 h-10 text-white" />
             </motion.div>
             <h2 className="text-2xl font-bold text-secondary-900 mb-2">
-              Welcome to your AI Tutor!
+              Welcome to GeoTutor!
             </h2>
             <p className="text-secondary-600 mb-6 max-w-md">
-              I'm here to help you learn. Ask me anything, request explanations,
-              or use commands like !quiz or !explain.
+              I'm your AI geography tutor. Ask me about GIS concepts, request explanations,
+              or use commands like !quiz or !explain for interactive learning.
             </p>
             {/* Suggestion chips */}
             {suggestions.length > 0 && (

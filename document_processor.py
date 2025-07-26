@@ -49,29 +49,72 @@ class DocumentProcessor:
             self._tfidf_matrix = None
     
     def _load_documents(self):
-        """Load and process all documents in the docs directory."""
+        """Load and process all documents recursively in the docs directory."""
         if not self.docs_path.exists():
             print(f"Warning: Documents directory {self.docs_path} does not exist.")
             return
         
-        # Process .txt files
-        for txt_file in self.docs_path.glob('*.txt'):
+        # Process .txt files recursively
+        txt_files = list(self.docs_path.rglob('*.txt'))
+        for txt_file in txt_files:
             self._process_txt_file(txt_file)
         
-        # Process .pdf files if pdfplumber is available
+        # Process .md files recursively
+        md_files = list(self.docs_path.rglob('*.md'))
+        for md_file in md_files:
+            self._process_md_file(md_file)
+        
+        # Process .pdf files recursively if pdfplumber is available
         if pdfplumber:
-            for pdf_file in self.docs_path.glob('*.pdf'):
+            pdf_files = list(self.docs_path.rglob('*.pdf'))
+            for pdf_file in pdf_files:
                 self._process_pdf_file(pdf_file)
         else:
-            pdf_files = list(self.docs_path.glob('*.pdf'))
+            pdf_files = list(self.docs_path.rglob('*.pdf'))
             if pdf_files:
                 print("Warning: PDF files found but pdfplumber not available. Install with: pip install pdfplumber")
+        
+        print(f"Loaded documents: {len(txt_files)} TXT, {len(md_files)} MD, {len(pdf_files) if pdfplumber else 0} PDF files")
     
     def _process_txt_file(self, file_path: Path):
         """Process a text file into chunks."""
         try:
             content = file_path.read_text(encoding='utf-8')
             # Split into paragraphs or chunks
+            chunks = self._split_into_chunks(content)
+            
+            for i, chunk_text in enumerate(chunks):
+                if chunk_text.strip():
+                    chunk = DocumentChunk(
+                        text=chunk_text,
+                        source=str(file_path),
+                        chunk_id=i
+                    )
+                    self._add_chunk_to_cache(chunk)
+        except Exception as e:
+            print(f"Error processing {file_path}: {e}")
+    
+    def _process_md_file(self, file_path: Path):
+        """Process a Markdown file into chunks."""
+        try:
+            content = file_path.read_text(encoding='utf-8')
+            
+            # Simple markdown processing: remove common markdown syntax
+            import re
+            # Remove markdown headers (# ## ###)
+            content = re.sub(r'^#+\s*', '', content, flags=re.MULTILINE)
+            # Remove markdown links [text](url)  
+            content = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', content)
+            # Remove markdown emphasis (* ** _ __)
+            content = re.sub(r'[*_]{1,2}([^*_]+)[*_]{1,2}', r'\1', content)
+            # Remove code blocks ```
+            content = re.sub(r'```[\s\S]*?```', '', content)
+            # Remove inline code `
+            content = re.sub(r'`([^`]+)`', r'\1', content)
+            # Remove markdown tables (basic)
+            content = re.sub(r'\|.*\|', '', content)
+            
+            # Split into chunks
             chunks = self._split_into_chunks(content)
             
             for i, chunk_text in enumerate(chunks):
